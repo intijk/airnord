@@ -16,6 +16,7 @@ void light::attach(int lightPin){
 }
 
 void light::LightOn(float amp){
+        Serial.println(amp);
 	//### should judge if the pin is analogWrite() enabled;
 	//analogWrite(pin, constrain(amp,0,255));
 	digitalWrite(pin,HIGH);

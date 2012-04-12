@@ -6,11 +6,38 @@
 #include "cloudPlatform.h"
 #include "light.h"
 
-#define MAX_PACK_LEN 100
-#define DEBUG 0
+#define MAX_PACK_LEN 70
+#define DEBUG 1
 
+int MotorLeftPin1 = 3;
+int MotorLeftPin2 = 2;
+int MotorRightPin1 = 9;
+int MotorRightPin2 = 8;
+int CloudPlatformPinV=5;
+int CloudPlatformPinH=6;
+int lightPin=7;
 
+aJsonObject* pack;
+aJsonObject* action;
+char* packp;
+String str;
+int angle,direct,vAngle,hAngle,vStepAngle,hStepAngle,V,H;
+float amp;
+uint8_t rcode;
 
+RP5 rp5(MotorLeftPin1, MotorLeftPin2, MotorRightPin1, MotorRightPin2);
+cloudPlatform cp;
+light lt;
+
+USB Usb;
+ADK adk(&Usb, "Google, Inc.",
+              "DemoKit",
+              "DemoKit Arduino Board",
+              "1.0",
+              "http://www.android.com",
+              "0000000012345678");
+
+//Store packet string in buffer str
 void getPacketStringFromSerial(char* str, int MaxLen){
   int i;
   char incomingByte;
@@ -45,90 +72,75 @@ aJsonObject* getNextPackFromSerial(){
         return pack;
 }
 
-int MotorLeftPin1 = 3;
-int MotorLeftPin2 = 2;
-int MotorRightPin1 = 9;
-int MotorRightPin2 = 8;
-int CloudPlatformPinV=5;
-int CloudPlatformPinH=6;
-int lightPin=7;
 
-RP5 rp5(MotorLeftPin1, MotorLeftPin2, MotorRightPin1, MotorRightPin2);
-cloudPlatform cp;
-light lt;
+void getPacketStringFromADK(char *str, int MaxLen){
+  int i=0;
+  char incomingByte;
+  uint16_t len=MaxLen-1;
+  uint8_t rcode;
+  uint8_t pack_str[MAX_PACK_LEN];
+  
+  Usb.Task();
+  if( adk.isReady() == false ) {
+     Serial.println("adk.isReady() == false");
+     return;
+  }
+  
+  rcode=adk.RcvData(&len,pack_str);
+  Serial.print("adk.RcvData return len=");
+  Serial.println(len);
+  while(pack_str[i]!=0x03 && i<len){
+    str[i]=pack_str[i];
+    i++;
+  }
+  if(pack_str[i]!=0x03){
+    //Did not finish at this read
+    //Serial.println("getPacketStringFromADK failed");
+    str[0]=0;
+  }else{
+    str[i]=0;
+  }
+}
 
-USB Usb;
-ADK adk(&Usb, "Google, Inc.",
-              "DemoKit",
-              "DemoKit Arduino Board",
-              "1.0",
-              "http://www.android.com",
-              "0000000012345678");
-
+aJsonObject* getNextPackFromADK(){
+        char pack_str[MAX_PACK_LEN];
+        
+        getPacketStringFromADK(pack_str,MAX_PACK_LEN);        
+        aJsonObject* pack=aJson.parse(pack_str);
+        if(DEBUG){
+          aJsonObject* action=aJson.getObjectItem(pack,"action");
+          char *packp=aJson.print(pack);
+          Serial.println("===");
+          Serial.println(pack_str);
+          Serial.println("---");
+          Serial.println(packp);
+          Serial.println("...");
+          Serial.println(action->valuestring);
+          free(packp);
+        }
+        return pack;
+}
 
 void setup() {
   
         Serial.begin(115200);     // opens serial port, sets data rate to 115200 bps
-        rp5.Stop();
-        
+
+     
         if(Usb.Init()==-1){
           Serial.println("Usb.Init() is not finish.");
           while(1); //Usb.Init()==-1 then stop.
         }
-        
-        cp.attach(CloudPlatformPinV,CloudPlatformPinH);
-        
-        lt.attach(lightPin);
-        
+        rp5.Stop();        
+        cp.attachPin(CloudPlatformPinV,CloudPlatformPinH);       
+       lt.attach(lightPin); 
 }
 
 
-
-aJsonObject* pack;
-aJsonObject* action;
-char* packp;
-String str;
-int angle,direct,vAngle,hAngle,vStepAngle,hStepAngle,V,H;
-float amp;
-uint8_t rcode;
-
-
 void loop() {
-/*
-  uint8_t pack_str[MAX_PACK_LEN];
-  uint16_t len=MAX_PACK_LEN;
-  uint8_t rcode;
-  
-  Usb.Task();
-  if( adk.isReady() == false ) {
-     return;
-  }
-  rcode=adk.RcvData(&len,pack_str);
-  
-#ifdef DEBUG
-  if(len>0){
-    Serial.println("\n==========");
-    Serial.print("rcode=");
-    Serial.println(rcode,HEX);
-    Serial.print("len=");
-    Serial.println(len,DEC);
-    int i;
-    for(i=0;i<len-1;i++){
-      Serial.print(pack_str[i],HEX);
-      Serial.print(" ");
-    }
-    Serial.println(pack_str[i],DEC);
-    
-    if(pack_str[0]==2){
-      rp5.MoveAngle(int(pack_str[2]/255.0*360),1);
-    }else{
-      rp5.Stop();
-    }
-  }
-#endif
-*/
-
- 
+  analogWrite(9,254);
+  //digitalWrite(9,1);
+  //pack=getNextPackFromADK();
+  /*
   pack=getNextPackFromSerial();
   if(pack!=NULL){
     action=aJson.getObjectItem(pack,"action");
@@ -141,8 +153,10 @@ void loop() {
     vStepAngle=aJson.getObjectItem(pack,"vStepAngle") -> valueint;
     hStepAngle=aJson.getObjectItem(pack,"hStepAngle") -> valueint;
 
-   
-    amp=aJson.getObjectItem(pack,"amp") -> valuefloat;  
+
+    amp=aJson.getObjectItem(pack,"amp") -> valuefloat;
+    Serial.println(amp);    
+    
     direct=aJson.getObjectItem(pack,"direct") -> valueint;
     Serial.println(str);
     
@@ -182,36 +196,8 @@ void loop() {
       lt.LightOff();
     }
     
-    
-    
     free(packp);
     aJson.deleteItem(pack);
-    
-    delay(10);
   }
-  
-  
-  /*
-  int i;
-  for(i=-90;i<90;i++){
-    cp.HAngle(i);
-    cp.VAngle(i);
-    delay(15);
-    lt.LightOn(1);
-  }
-  for(i=90;i>=-90;i--){
-    cp.HAngle(i);
-    cp.VAngle(i);
-    delay(15);
-    lt.LightOff();
-  }
-  
-  */
-  /*
-  lt.LightOn(1);
-  delay(1000);
-  lt.LightOff();
-  delay(1000);
-  */
-  
+  delay(200);*/
 }

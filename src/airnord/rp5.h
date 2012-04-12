@@ -133,9 +133,9 @@ void RP5:: MoveAngle(int Angle, float amp){
     r=-1;
 
   }
-      Serial.println(l);
-    Serial.println(r);
-    Serial.println(amp);
+  Serial.println(l);
+  Serial.println(r);
+  Serial.println(amp);
   l=l*255*amp;
   r=r*255*amp;
   Serial.print("l=");
@@ -148,28 +148,40 @@ void RP5:: MoveAngle(int Angle, float amp){
   if(abs(r)<rb){
     r=0;
   }
-  if(l>=0){
-    l1=l;
+  if(l>=0.0){
+    l1=int(l);
     l2=0;
   }
   else{
-    l1=255+l;
+    l1=255+int(l);
     l2=1;
   }
 
-  if(r>=0){
-    r1=r;
+  if(r>=0.0){
+    r1=int(r);
     r2=0;
   }
   else{
-    r1=255+r;
+    r1=255+int(r);
     r2=1;
   }
+  Serial.println(l1);
+  Serial.println(l2);
+  Serial.println(r1);
+  Serial.println(r2);
   output(l1,l2,r1,r2);
 }
 void RP5:: output(int l1,int l2, int r1,int r2){
+  Serial.print("l1=");
+  Serial.println(l1);
+  Serial.print("pl1=");
+  Serial.println(pl1);
   analogWrite(pl1,l1);
   digitalWrite(pl2,l2);
+  Serial.print("pr1=");
+  Serial.println(pr1);
+  Serial.print("r1=");
+  Serial.println(r1);
   analogWrite(pr1,r1);
   digitalWrite(pr2,r2);
 }

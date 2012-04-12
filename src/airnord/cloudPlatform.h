@@ -1,11 +1,11 @@
 #ifndef CLOUDPLATFORM_H
 #define CLOUDPLATFORM_H
 
-
+                Servo vServo,hServo;
 class cloudPlatform{
 	public:
 		cloudPlatform();
-                void attach(int VerticalPin,int HerizontalPin); 
+                void attachPin(int VerticalPin,int HerizontalPin); 
 		void HAngle(int angle);
 		void VAngle(int angle);
 		void HStep(int step);
@@ -15,7 +15,7 @@ class cloudPlatform{
 		int getVAngle();
 		int getHAngle();
 	private:
-                Servo vServo,hServo;
+
 		int vPin,hPin,vValue,hValue;
 		int vLB,vUB,hLB,hUB;
 };
@@ -27,18 +27,17 @@ cloudPlatform::cloudPlatform(){
 	vUB=179;
 	hLB=10;
 	hUB=179;
-        
 }
 
-void cloudPlatform::attach(int VerticalPin,int HerizontalPin){  
+void cloudPlatform::attachPin(int VerticalPin,int HerizontalPin){  
         vPin=VerticalPin;
         hPin=HerizontalPin;
-        pinMode(VerticalPin,OUTPUT);
-        pinMode(HerizontalPin,OUTPUT);
-	vServo.attach(vPin);
-	hServo.attach(hPin);
-	HAngle(0);
-        VAngle(0);
+        pinMode(vPin,OUTPUT);
+        pinMode(hPin,OUTPUT);
+	//vServo.attach(vPin);
+	//hServo.attach(hPin);
+	//HAngle(0);
+        //VAngle(0);
 }
 
 void cloudPlatform::HAngle(int angle){

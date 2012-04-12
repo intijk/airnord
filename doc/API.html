@@ -1,0 +1,118 @@
+<hr />
+
+<h1>Move Action</h1>
+
+<hr />
+
+<p><strong>GET action</strong> <em>http://example.org/action</em>    </p>
+
+<p>Parameters:  </p>
+
+<ul>
+<li><p>action  <em>http://example.org/action?action=[value]</em>    </p>
+
+<p>Values:  </p>
+
+<ul>
+<li><p><strong>Stop</strong> <br />
+Example: http://example.org/action?action=Stop         </p></li>
+<li><p><strong>MoveForward</strong> <br />
+Example: http://example.org/action?action=MoveForward       </p></li>
+<li><p><strong>MoveBackward</strong> <br />
+Example: http://example.org/action?action=MoveBackward  </p></li>
+<li><p><strong>MoveLeft</strong> <br />
+In truth, as Airnord using pedrail car,it is 'Rotate anticlockwise', example: <br />
+<em>http://example.org/action?action=MoveLeft</em>  </p></li>
+<li><p><strong>MoveRight</strong> <br />
+In truth, as Airnord using pedrail car,it is 'Rotate clockwise', example: <br />
+<em>http://example.org/action?action=MoveRight</em>  </p></li>
+<li><p><strong>RotateLeft</strong> <br />
+The same as 'MoveLeft', example: <br />
+<em>http://example.org/action?action=RotateLeft</em>  </p></li>
+<li><p><strong>RotateRight</strong> <br />
+The same as 'MoveRight', example: <br />
+<em>http://example.org/action?action=RotateRight</em>  </p></li>
+<li><p><strong>Rotate</strong> <br />
+Should append parameter 'direct', example: <br />
+<em>http://example.org/action?action=Rotate?direct=0</em> <br />
+Where 0 indicate anticlockwise rotate, 1 for clockwise.  </p></li>
+<li><p><strong>MoveAngle</strong> <br />
+Move in direction, append parameter 'angle' and 'amp', where amp is [0,1] for speed control. The angle is in the math cartesian coordinate type, ie. MoveForward is the same as angle=90, the angle ascend anticlockwisely. example: <br />
+<em>http://example.org/action?action=MoveAngle&amp;angle=90&amp;amp=0.9</em>  </p></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h1>Cloud platform action</h1>
+
+<hr />
+
+<p><strong>GET action</strong> http://example.org/action  </p>
+
+<p>Parameters:  </p>
+
+<ul>
+<li><p>action  </p>
+
+<ul>
+<li><p><strong>TripodHAngle</strong> <br />
+Move cloud platform horizontally to specified angle. <br />
+Should append parameter 'angle'. <br />
+Example: <br />
+<em>http://example.org/action?action=TripodHAngle&amp;angle=10</em>  </p></li>
+<li><p><strong>TripodVAngle</strong> <br />
+Move cloud platform vertically to specified angle. <br />
+Should append parameter 'angle'. <br />
+Example: <br />
+<em>http://example.org/action?action=TripodVAngle&amp;angle=10</em>  </p></li>
+<li><p><strong>TripodHStep</strong> <br />
+Step cloud platform a specified angle horizontally. <br />
+Should append parameter 'angle'. <br />
+Example: <br />
+<em>http://example.org/action?action=TripodHStep&amp;angle=10</em>  </p></li>
+<li><p><strong>TripodVStep</strong> <br />
+Step cloud platform a specified angle vertically. <br />
+Should append parameter 'angle'. <br />
+Example: <br />
+<em>http://example.org/action?action=TripodVStep&amp;angle=10</em>  </p></li>
+<li><p><strong>TripodVector</strong> <br />
+Move cloud platform to specified angle both horizontally and vertically. <br />
+Should append parameter 'H' and 'V'. <br />
+Example: <br />
+<em>http://example.org/action?action=TripodVector&amp;H=10&amp;V=5</em>  </p></li>
+<li><p><strong>TripodVector</strong> <br />
+Step cloud platform a specified angle both horizontally and vertically. <br />
+Should append parameter 'H' and 'V'. <br />
+Example: <br />
+<em>http://example.org/action?action=TripodStepVector&amp;H=10&amp;V=5</em>  </p></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h1>Light</h1>
+
+<hr />
+
+<p><strong>GET action</strong> <em>http://example.org/action</em></p>
+
+<p>Parameters:</p>
+
+<ul>
+<li><p>action  <em>http://example.org/action?action=[value]</em></p>
+
+<ul>
+<li><p><strong>LightOn</strong> <br />
+Light on. <br />
+Should appedn parameter 'amp', which indicate the amplitude of the light. <br />
+Example: <br />
+<em>http://example.org/action?action=LightOn&amp;amp=0.8</em>  </p></li>
+<li><p><strong>LightOff</strong> <br />
+Light Off. <br />
+Example: <br />
+<em>http://example.org/action?action=LightOff</em>  </p></li>
+</ul></li>
+</ul>
+
+<hr />

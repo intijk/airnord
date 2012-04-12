@@ -1,0 +1,142 @@
+<h1>Android and Arduino Communication specification. (AAComm)</h1>
+
+<h1>小车运动相关：</h1>
+
+<h2>停止：</h2>
+
+<pre><code>{
+    "action":"Stop"
+}
+</code></pre>
+
+<h2>向前移动：</h2>
+
+<pre><code>{
+    "action":"MoveForward"
+}
+</code></pre>
+
+<h2>向后移动：</h2>
+
+<pre><code>{
+    "action":"MoveBackward"
+}
+</code></pre>
+
+<h2>向左移动：</h2>
+
+<pre><code>{
+    "action":"MoveLeft"
+}
+</code></pre>
+
+<h2>向右移动:</h2>
+
+<pre><code>{
+    "action":"MoveRight"
+}
+</code></pre>
+
+<h2>向左旋转:</h2>
+
+<pre><code>{
+    "action":"RotateLeft"
+}
+</code></pre>
+
+<h2>向右旋转：</h2>
+
+<pre><code>{
+    "action":"RotateRight"
+}
+</code></pre>
+
+<h2>旋转（direct为0代表逆时针，为1代表顺时针）:</h2>
+
+<pre><code>{
+    "action":"Rotate",
+    "direct":0
+}
+</code></pre>
+
+<h2>角度运动:</h2>
+
+<pre><code>{
+    "action":"MoveAngle",
+    "angle":-90,
+    "amp":0.8
+}
+</code></pre>
+
+<h1>云台控制：</h1>
+
+<h2>水平运动到角度：</h2>
+
+<pre><code>{
+    "action":"TripodHAngle",
+    "angle":-15
+}
+</code></pre>
+
+<h2>垂直运动到角度：</h2>
+
+<pre><code>{
+    "action":"TripodVAngle",
+    "angle":10
+}
+</code></pre>
+
+<h2>水平步进一段：</h2>
+
+<pre><code>{
+    "action":"TripodHStep",
+    "angle":-10
+}
+</code></pre>
+
+<h2>垂直步进一段：</h2>
+
+<pre><code>{
+    "action":"TripodVStep",
+    "angle":15
+}
+</code></pre>
+
+<h2>移动到角度：</h2>
+
+<pre><code>{
+    "action":"TripodVector",
+    "H":10,
+    "V":5
+}
+</code></pre>
+
+<h2>步进一个角度：</h2>
+
+<pre><code>{
+    "action":"TripodStepVector",
+    "H":-5,
+    "V":10
+}
+</code></pre>
+
+<h1>灯控:</h1>
+
+<h2>亮灯：</h2>
+
+<pre><code>{
+    "action":"LightOn",
+    "amp":0.6
+}
+</code></pre>
+
+<h2>灭灯：</h2>
+
+<pre><code>{
+    "action":"LightOff"
+}
+</code></pre>
+
+<h1>终止码：</h1>
+
+<p>发送方需要在每个数据包之后添加0x03的ETX终止码，标志一个数据包发送的完成。</p>

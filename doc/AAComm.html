@@ -1,0 +1,142 @@
+<h1>Android and Arduino Communication specification. (AAComm)</h1>
+
+<h1>Car robot motion:</h1>
+
+<h2>Stop：</h2>
+
+<pre><code>{
+    "action":"Stop"
+}
+</code></pre>
+
+<h2>MoveForward：</h2>
+
+<pre><code>{
+    "action":"MoveForward"
+}
+</code></pre>
+
+<h2>MoveBackward：</h2>
+
+<pre><code>{
+    "action":"MoveBackward"
+}
+</code></pre>
+
+<h2>MoveLeft：</h2>
+
+<pre><code>{
+    "action":"MoveLeft"
+}
+</code></pre>
+
+<h2>MoveRight:</h2>
+
+<pre><code>{
+    "action":"MoveRight"
+}
+</code></pre>
+
+<h2>RotateLeft:</h2>
+
+<pre><code>{
+    "action":"RotateLeft"
+}
+</code></pre>
+
+<h2>RotateRight：</h2>
+
+<pre><code>{
+    "action":"RotateRight"
+}
+</code></pre>
+
+<h2>Rotate(direct=0 for anticlockwise, 1 for clockwise):</h2>
+
+<pre><code>{
+    "action":"Rotate",
+    "direct":0
+}
+</code></pre>
+
+<h2>MoveAngle:</h2>
+
+<pre><code>{
+    "action":"MoveAngle",
+    "angle":-90,
+    "amp":0.8
+}
+</code></pre>
+
+<h1>CloudPlatform：</h1>
+
+<h2>Move cloud platform horizontally to specified angle.</h2>
+
+<pre><code>{
+    "action":"TripodHAngle",
+    "angle":-15
+}
+</code></pre>
+
+<h2>Move cloud platform vertically to specified angle.</h2>
+
+<pre><code>{
+    "action":"TripodVAngle",
+    "angle":10
+}
+</code></pre>
+
+<h2>Step a specified angle horizontally.</h2>
+
+<pre><code>{
+    "action":"TripodHStep",
+    "angle":-10
+}
+</code></pre>
+
+<h2>Step a specified angle vertically.</h2>
+
+<pre><code>{
+    "action":"TripodVStep",
+    "angle":15
+}
+</code></pre>
+
+<h2>Move to specified angle both horizontally and vertically.</h2>
+
+<pre><code>{
+    "action":"TripodVector",
+    "H":10,
+    "V":5
+}
+</code></pre>
+
+<h2>Step a specified angle both horizontally and vertically.</h2>
+
+<pre><code>{
+    "action":"TripodStepVector",
+    "H":-5,
+    "V":10
+}
+</code></pre>
+
+<h1>Light Control</h1>
+
+<h2>Light on:</h2>
+
+<pre><code>{
+    "action":"LightOn",
+    "amp":0.6
+}
+</code></pre>
+
+<h2>Light Off:</h2>
+
+<pre><code>{
+    "action":"LightOff"
+}
+</code></pre>
+
+<h1>Stop Code:</h1>
+
+<p>Sender need to append a 0x03 termination code after the json packet.</p>
