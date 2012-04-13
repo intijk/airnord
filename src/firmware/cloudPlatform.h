@@ -1,7 +1,7 @@
 #ifndef CLOUDPLATFORM_H
 #define CLOUDPLATFORM_H
 
-                Servo vServo,hServo;
+Servo vServo,hServo;
 class cloudPlatform{
 	public:
 		cloudPlatform();

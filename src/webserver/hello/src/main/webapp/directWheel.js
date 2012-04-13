@@ -70,7 +70,7 @@ $("canvas")
     console.log(angle);
     console.log(amp);
     if(Date.now()-lastSendTime>600){
-        $.get("http://192.168.1.151:8080/hello-3.2-SNAPSHOT/sayit?action=MoveAngle&angle=" + angle + "&amp=" + amp,null,function(){
+        $.get("http://"+ip+":"+port+"/"+dir+"/action?action=MoveAngle&angle=" + angle + "&amp=" + amp,null,function(){
 	console.log("success!");
 });
 	lastSendTime=Date.now();
