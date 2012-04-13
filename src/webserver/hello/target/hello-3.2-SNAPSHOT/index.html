@@ -2,11 +2,15 @@
 		<head>
 				<script type="text/javascript" src="jquery.js"></script>
 				<script type="text/javascript" src="jcanvas.js"></script>
+				<script type="text/javascript" src="config.js"></script>
 				<script type="text/javascript">
+						var ip="192.168.1.151";
+						var port="80";
+						var dir="hello-3.2-SNAPSHOT";
 						$(function(){
 										$("#MoveForward").bind(
 												"click", function(){
-												$.get("http://192.168.1.151:8080/hello-3.2-SNAPSHOT/sayit?action=MoveForward");
+												$.get("http://"+$ip+":"+$port+"/action?action=MoveForward");
 		
 												}
 												)
@@ -16,7 +20,7 @@
 										$("#MoveBackward").bind(
 												"click", function(){
 
-												$.get("http://192.168.1.151:8080/hello-3.2-SNAPSHOT/sayit?action=MoveBackward");
+												$.get("http://"+$ip+":"+$port+"/action?action=MoveBackward");
 												}
 												)
 										})
@@ -24,7 +28,7 @@
 										$("#MoveLeft").bind(
 												"click", function(){
 
-												$.get("http://192.168.1.151:8080/hello-3.2-SNAPSHOT/sayit?action=MoveLeft");
+												$.get("http://"+$ip+":"+$port+"/action?action=MoveLeft");
 												}
 												)
 										})
@@ -32,15 +36,15 @@
 										$("#MoveRight").bind(
 												"click", function(){
 
-												$.get("http://192.168.1.151:8080/hello-3.2-SNAPSHOT/sayit?action=MoveRight");
+												$.get("http://"+$ip+":"+$port+"/action?action=MoveRight");
 												}
 												)
-										})
+e									})
 
 						$(function(){
 										$("#Stop").bind(
 												"click", function(){
-												$.get("http://192.168.1.151:8080/hello-3.2-SNAPSHOT/sayit?action=Stop");
+												$.get("http://"+$ip+":"+$port+"/action?action=Stop");
 												}
 												)
 										})

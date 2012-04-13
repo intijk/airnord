@@ -6,13 +6,13 @@
    	version="3.0"> 
 
   <servlet>
-    <servlet-name>hello</servlet-name>
+    <servlet-name>action</servlet-name>
     <servlet-class>org.mortbay.ijetty.hello.HelloWorld</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/sayit/*</url-pattern>
+    <servlet-name>action</servlet-name>
+    <url-pattern>/action/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
