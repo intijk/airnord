@@ -1,0 +1,21 @@
+<html>
+		<h1>ajax</h1>
+		<head>
+				<script type="text/javascript" src="jquery.js"></script>
+				<script type="text/javascript" src="jcanvas.js"></script>
+				<script type="text/javascript">
+						$(document).ready(function(){
+								$("p").text("aaa");
+								$.get("http://g.cn",,
+										function(data, getStatus){
+											alert(data); 
+										});
+								//$.get("http://localhost:8020/cgi-bin/t",,
+						});
+
+				</script>
+		</head>
+		<body>
+				<p id="text"/>
+		</body>
+</html>
