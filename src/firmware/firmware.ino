@@ -3,18 +3,20 @@
 #include <adk.h>
 #include <Servo.h>
 #include "rp5.h"
-//#include "cloudPlatform.h"
+#include "cloudPlatform.h"
 #include "light.h"
 
 #define MAX_PACK_LEN 70
 #define DEBUG 1
 
+
+
 int MotorLeftPin1 = 3;
 int MotorLeftPin2 = 2;
-int MotorRightPin1 = 9; 
-int MotorRightPin2 = 8;
-int CloudPlatformPinV=5;
-int CloudPlatformPinH=6;
+int MotorRightPin1 = 5; 
+int MotorRightPin2 = 4;
+int CloudPlatformPinV=6;
+int CloudPlatformPinH=9;
 int lightPin=7;
 
 aJsonObject* pack;
@@ -26,7 +28,7 @@ float amp;
 uint8_t rcode;
 
 RP5 rp5(MotorLeftPin1, MotorLeftPin2, MotorRightPin1, MotorRightPin2);
-//cloudPlatform cp;
+cloudPlatform cp;
 light lt;
 
 USB Usb;
@@ -128,11 +130,10 @@ void setup() {
           while(1); //Usb.Init()==-1 then stop.
         }
       rp5.Stop();        
-      //cp.attachPin(CloudPlatformPinV,CloudPlatformPinH);       
+      cp.attachPin(CloudPlatformPinV,CloudPlatformPinH);       
       lt.attach(lightPin); 
 }
 
-//Servo a;
 int i,j;
 void loop() { 
   pack=getNextPackFromADK();
@@ -174,7 +175,7 @@ void loop() {
       rp5.Rotate(direct);
     }else if(str.equals("MoveAngle")){
       rp5.MoveAngle(angle,amp);
-    }/*else if(str.equals("TripodHAngle")){
+    }else if(str.equals("TripodHAngle")){
       cp.HAngle(angle);
     }else if(str.equals("TripodVAngle")){
       cp.VAngle(angle);
@@ -190,7 +191,7 @@ void loop() {
       lt.LightOn(amp);
     }else if(str.equals("LightOff")){
       lt.LightOff();
-    }*/
+    }
     
     free(packp);
     aJson.deleteItem(pack);
